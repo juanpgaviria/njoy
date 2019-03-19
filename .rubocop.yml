@@ -1,0 +1,43 @@
+
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'config/environments/**'
+    - 'config/initializers/**.rb'
+    - 'config/application.rb'
+    - 'config/boot.rb'
+    - 'config/cable.yml'
+    - 'config/database.yml'
+    - 'config/enviroment.rb'
+    - 'config/puma.rb'
+    - 'config/secrets.yml'
+    - 'config/spring.rb'
+    - 'bin/*'
+    - 'app/channels/application_cable/**'
+    - 'vendor/**/*'
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*'
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Metrics/LineLength:
+  Max: 100
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
