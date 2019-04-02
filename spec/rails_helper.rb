@@ -3,7 +3,7 @@ SimpleCov.start 'rails' do
   add_filter 'spec'
 end
 
-require 'capybara/rails'
+require 'capybara/rspec'
 require 'chromedriver-helper'
 require 'database_cleaner'
 
@@ -43,6 +43,8 @@ end
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+  config.include RequestSpecHelper
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

@@ -12,7 +12,9 @@ RSpec.configure do |config|
       MSG
     end
 
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.clean_with :truncation
+    # Use transactions for tests
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.before(:each) do
