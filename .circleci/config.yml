@@ -4,7 +4,7 @@ jobs:
     environment:
       CC_TEST_REPORTER_ID: 70a3a84db9ff477fe82c91874041ca56e647bd6402e328d290875ef3f84bd212
     docker:
-      - image: circleci/ruby:2.6.0-node
+      - image: circleci/ruby:2.6.0-node-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -17,6 +17,7 @@ jobs:
           POSTGRES_USER: njoy
           POSTGRES_DB: njoy_test
           POSTGRES_PASSWORD: ""
+
     steps:
       - checkout
 
@@ -48,12 +49,14 @@ jobs:
       - run:
           name: Database setup
           command: bin/rails db:migrate
+
       - run:
           name:  Download cc-test-reporter
           command: |
             mkdir -p tmp/
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
             chmod +x ./tmp/cc-test-reporter
+
       - persist_to_workspace:
           root: tmp
           paths:
@@ -69,18 +72,27 @@ jobs:
           paths:
             - codeclimate.backend.json
 
-      - run:
-          name: Run rubocop
-          command: bundle exec rubocop
-
-      - attach_workspace:
-          at: ~/repo/tmp
-      - run:
-          name: Upload coverage results to Code Climate
-          command: |
-            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
-            ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
-
       # Save test results for timing analysis
       - store_test_results:
           path: test_results
+  deploy:
+      docker:
+        - image: buildpack-deps:trusty
+      steps:
+        - checkout
+        - run:
+            name: Deploy Master to Heroku
+            command: |
+              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

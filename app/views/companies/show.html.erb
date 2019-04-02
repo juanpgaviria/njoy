@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+  <h1>you are logged as <%= current_user.email %></h1>
+  <h1>Restaurante <%= @company.name %></h1>
+  <%= link_to 'Salir', destroy_user_session_path, method: :delete %>
+<% else %>
+  <h1>you are logged as <%= @company.name %></h1>
+  <%= link_to 'Salir', destroy_company_session_path, method: :delete %>
+<% end %>
