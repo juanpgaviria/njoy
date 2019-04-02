@@ -1,8 +1,13 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/work/pos/njoy
+    shell: /bin/bash --login
     environment:
       CC_TEST_REPORTER_ID: 70a3a84db9ff477fe82c91874041ca56e647bd6402e328d290875ef3f84bd212
+      RAILS_ENV: test
+      RACK_ENV: test
+      COVERAGE: true
     docker:
       - image: circleci/ruby:2.6.0-node-browsers
         environment:
@@ -11,7 +16,6 @@ jobs:
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: njoy
-          RAILS_ENV: test
       - image: circleci/postgres:9.5-alpine
         environment:
           POSTGRES_USER: njoy
@@ -51,30 +55,42 @@ jobs:
           command: bin/rails db:migrate
 
       - run:
-          name:  Download cc-test-reporter
+          name: Install Code Climate Test Reporter
           command: |
-            mkdir -p tmp/
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
-            chmod +x ./tmp/cc-test-reporter
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
 
-      - persist_to_workspace:
-          root: tmp
-          paths:
-            - cc-test-reporter
-      # Run rspec in parallel
       - run:
-          name: Run backend tests
+          name: Run tests
           command: |
-            bundle exec rspec
-            ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/codeclimate.backend.json coverage/backend/.resultset.json
-      - persist_to_workspace:
-          root: tmp
-          paths:
-            - codeclimate.backend.json
+            mkdir -p test-results/rspec test-artifacts
+            ./cc-test-reporter before-build
+            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            bundle exec rspec --profile 10 \
+                              --color \
+                              --order random \
+                              --format RspecJunitFormatter \
+                              --out test-results/rspec/rspec.xml \
+                              --format progress \
+                              -- ${TESTFILES}
+            ./cc-test-reporter after-build
 
-      # Save test results for timing analysis
+      - run:
+          name: Code Climate Test Coverage
+          command: |
+            ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.coverage.json"
+
+      - persist_to_workspace:
+          root: coverage
+          paths:
+            - codeclimate.coverage.json
+
       - store_test_results:
-          path: test_results
+          path: test-results
+
+      - store_artifacts:
+          path: test-artifacts
+
   deploy:
       docker:
         - image: buildpack-deps:trusty
@@ -84,6 +100,22 @@ jobs:
             name: Deploy Master to Heroku
             command: |
               git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
+  # upload-coverage:
+  #   docker:
+  #     - image: circleci/ruby:2.6.0-node-browsers
+  #   environment:
+  #     CC_TEST_REPORTER_ID: c3ff91e23ea0fea718bb62dae0a8a5440dc082d5d2bb508af6b33d0babac479a
+  #
+  #   steps:
+  #     - run:
+  #         name: Install Code Climate Test Reporter
+  #         command: |
+  #           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  #           chmod +x ./cc-test-reporter
+  #     - run:
+  #         command: |
+  #           ./cc-test-reporter sum-coverage --output - codeclimate.coverage.json | ./cc-test-reporter upload-coverage --debug --input -
 
 workflows:
   version: 2
