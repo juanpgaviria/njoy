@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">nJoy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <% if current_session %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">
+              <%= user_signed_in? ? current_user.email.split('@')[0].capitalize : current_company.name.titleize %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% if user_signed_in? %>
+                <%= link_to 'Crear restaurante', new_company_registration_path, class: 'dropdown-item' %>
+                <%= link_to 'Salir', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+              <% else %>
+                <%= link_to 'Salir', destroy_company_session_path, method: :delete, class: 'dropdown-item' %>
+              <% end %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Registrate', new_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Entrar
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'Restaurante', new_company_session_path, class: 'dropdown-item' %>
+              <%= link_to 'Dueño', new_user_session_path, class: 'dropdown-item' %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

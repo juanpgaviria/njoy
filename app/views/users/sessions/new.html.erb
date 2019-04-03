@@ -1,10 +1,10 @@
-<h2 class="text-center">Entra como restaurante</h2>
+<h2 class="text-center">Entra como dueño</h2>
 <div class="row justify-content-center">
   <div class="col-5">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "usuario", class: 'form-control' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
       </div>
 
       <div class="form-group">
@@ -15,13 +15,14 @@
       <% if devise_mapping.rememberable? %>
         <div class="form-group">
           <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
+          <%= f.label :remember_me, class: 'form-check-label' %>
         </div>
       <% end %>
 
-      <div class="actions">
+      <div class="actions ml-auto ">
         <%= f.submit "Entrar", class: 'btn btn-primary float-right' %>
       </div>
     <% end %>
+    <%= render "users/shared/links" %>
   </div>
 </div>
