@@ -1,0 +1,14 @@
+<tr id="supplier_<%= supplier.id %>">
+  <td><%= supplier.id %></td>
+  <td><%= supplier.name.titleize %></td>
+  <td><%= supplier.address.capitalize %></td>
+  <td><%= supplier.city.titleize %></td>
+  <td><%= supplier.phone %></td>
+  <td><%= supplier.identification %></td>
+  <td><%= supplier.contact_name.titleize %></td>
+  <td><%= supplier.products.count %></td>
+  <td><%= link_to 'Ver', supplier_path(supplier) %> -
+      <%= link_to 'Editar', edit_supplier_path(supplier) %> -
+      <%= link_to 'Eliminar', supplier_path(supplier), method: :delete, data: { confirm: "Si elimina este proveedor, tambien eliminas #{supplier.products.count} productos. Estas seguro?" } %>
+  </td>
+</tr>

@@ -14,6 +14,8 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'coffee-rails', '~> 4.2'
 # Authentication
 gem 'devise'
+# pretty console
+gem 'hirb'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
