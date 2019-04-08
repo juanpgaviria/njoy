@@ -1,0 +1,14 @@
+<tr id="product_<%= product.id %>">
+  <td><%= product.id %></td>
+  <td><%= product.name.titleize %></td>
+  <td><%= product.quantity %></td>
+  <td><%= product.price %></td>
+  <td><%= product.description.capitalize %></td>
+  <td><%= product.brand.capitalize %></td>
+  <td><%= product.category.name.titleize %></td>
+  <td><%= product.supplier.name.titleize %></td>
+  <td><%= link_to 'Ver', product_path(product) %> -
+      <%= link_to 'Editar', edit_product_path(product) %> -
+      <%= link_to 'Eliminar', product_path(product), method: :delete, data: { confirm: 'Estas seguro?' } %>
+  </td>
+</tr>
