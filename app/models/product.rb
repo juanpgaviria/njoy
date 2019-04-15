@@ -4,8 +4,8 @@
 #
 #  id          :bigint(8)        not null, primary key
 #  name        :string
-#  quantity    :string
-#  price       :string
+#  quantity    :integer
+#  price       :decimal(, )
 #  description :string
 #  brand       :string
 #  category_id :bigint(8)

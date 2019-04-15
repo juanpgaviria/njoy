@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_company!
-  before_action :find_product, except: %i[index new create]
+  before_action :find_category, except: %i[index new create]
 
   def index
     @categories = current_company.categories.all
@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:name, :description)
   end
 
-  def find_product
+  def find_category
     @category = current_company.categories.find(params[:id])
   end
 end

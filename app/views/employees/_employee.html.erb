@@ -1,0 +1,13 @@
+<tr id="employee_<%= employee.id %>">
+  <td><%= employee.id %></td>
+  <td><%= employee.names.titleize %></td>
+  <td><%= employee.last_names.titleize %></td>
+  <td><%= employee.phone %></td>
+  <td><%= employee.address %></td>
+  <td><%= employee.email %></td>
+  <td><%= employee.birthday %></td>
+  <td><%= link_to 'Ver', employee_path(employee) %> -
+      <%= link_to 'Editar', edit_employee_path(employee) %> -
+      <%= link_to 'Eliminar', employee_path(employee), method: :delete, data: { confirm: 'Estas seguro?' } %>
+  </td>
+</tr>

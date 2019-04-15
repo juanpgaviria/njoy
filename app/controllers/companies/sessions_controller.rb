@@ -16,9 +16,10 @@ class Companies::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    employee_sign_out if current_employee
+    super
+  end
 
   # protected
 

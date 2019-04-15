@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Categories', type: :request do
-
   describe 'company no logged' do
     before { get '/categories' }
 
@@ -19,7 +18,6 @@ RSpec.describe 'Categories', type: :request do
     before { sign_in company }
 
     describe 'GET /categories' do
-
       before { get '/categories' }
       it 'success' do
         expect(response.status).to eq 200
@@ -28,7 +26,6 @@ RSpec.describe 'Categories', type: :request do
     end
 
     describe 'GET /categories/:id' do
-
       before { get "/categories/#{category.id}" }
 
       it 'success' do
@@ -65,7 +62,6 @@ RSpec.describe 'Categories', type: :request do
           expect(company.categories.count).to eq 10
           expect(response).to render_template(:new)
         end
-
       end
     end
     describe 'GET /categories/:id/edit' do
