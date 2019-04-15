@@ -14,8 +14,10 @@ describe 'Company signin process', type: :feature, js: true do
     end
     click_button 'Entrar'
     expect(page).to have_current_path(company_path(company.id))
-    click_link company.name.titleize
-    click_link 'Salir'
+    within('.ml-auto') do
+      find('.dropdown-toggle').click
+      click_link 'Salir'
+    end
     expect(page).to have_current_path(root_path)
   end
 end

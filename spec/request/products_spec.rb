@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Products', type: :request do
-
   describe 'company no logged' do
     before { get '/products' }
 
@@ -23,7 +22,6 @@ RSpec.describe 'Products', type: :request do
     before { sign_in company }
 
     describe 'GET /products' do
-
       before { get '/products' }
       it 'success' do
         expect(response.status).to eq 200
@@ -32,7 +30,6 @@ RSpec.describe 'Products', type: :request do
     end
 
     describe 'GET /products/:id' do
-
       before { get "/products/#{product.id}" }
 
       it 'success' do
@@ -70,7 +67,6 @@ RSpec.describe 'Products', type: :request do
           expect(company.products.count).to eq 10
           expect(response).to render_template(:new)
         end
-
       end
     end
     describe 'GET /products/:id/edit' do

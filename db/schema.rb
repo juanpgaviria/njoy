@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_04_175425) do
+ActiveRecord::Schema.define(version: 2019_04_09_152205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,28 @@ ActiveRecord::Schema.define(version: 2019_04_04_175425) do
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.string "names", limit: 100
+    t.string "last_names", limit: 100
+    t.string "address"
+    t.string "state"
+    t.string "city"
+    t.string "identification"
+    t.string "phone", limit: 100
+    t.string "email", limit: 100
+    t.date "birthday"
+    t.date "start_date"
+    t.binary "password"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_employees_on_company_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.string "quantity"
-    t.string "price"
+    t.integer "quantity"
+    t.decimal "price"
     t.string "description"
     t.string "brand"
     t.bigint "category_id"
@@ -82,6 +100,7 @@ ActiveRecord::Schema.define(version: 2019_04_04_175425) do
 
   add_foreign_key "categories", "companies"
   add_foreign_key "companies", "users"
+  add_foreign_key "employees", "companies"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "companies"
   add_foreign_key "products", "suppliers"

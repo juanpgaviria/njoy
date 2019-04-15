@@ -14,6 +14,8 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'coffee-rails', '~> 4.2'
 # Authentication
 gem 'devise'
+# Decorators
+gem 'draper'
 # pretty console
 gem 'hirb'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -34,8 +36,6 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-
-
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
