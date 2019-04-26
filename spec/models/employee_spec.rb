@@ -15,6 +15,7 @@
 #  start_date     :date
 #  password       :binary
 #  company_id     :bigint(8)
+#  role           :integer          default("delivery")
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -32,6 +33,7 @@ RSpec.describe Employee, type: :model do
   it { should validate_presence_of(:phone) }
   it { should validate_presence_of(:identification) }
   it { should validate_presence_of(:password) }
+  it { should validate_presence_of(:role) }
 
   it 'should show uniqueness error' do
     employees = company.employees.new(password_duplicated_params)

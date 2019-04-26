@@ -15,6 +15,7 @@
 #  start_date     :date
 #  password       :binary
 #  company_id     :bigint(8)
+#  role           :integer          default("delivery")
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -32,6 +33,7 @@ FactoryBot.define do
     birthday { Faker::Date.between(60.years.ago, 18.years.ago) }
     start_date { Faker::Date.between(1.years.ago, Date.today) }
     password { Faker::Number.unique.number(5) }
+
     company
   end
 end

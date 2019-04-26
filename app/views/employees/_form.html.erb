@@ -37,6 +37,11 @@
         <div class="form-group">
           <%= f.text_field :city, class: "form-control", placeholder: "Ciudad" %>
         </div>
+
+        <div class="form-group role-select">
+          <%= f.label 'Role' %>
+          <%= f.select :role, Employee.roles.keys.map { |w| [w.humanize, w] }, {}, class: "form-control" %>
+        </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">

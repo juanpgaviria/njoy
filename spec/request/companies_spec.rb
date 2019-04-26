@@ -36,44 +36,61 @@ RSpec.describe 'Companies', type: :request do
         get '/companies'
       end
 
-      it 'should redirect' do
-        expect(response.status).to eq 302
+      describe 'employee logged without permissions' do
+        let!(:employee) { create(:employee, company: company, password: '1234', role: :chef) }
+
+        before { sign_in_employee }
+
+        it 'should redirect' do
+          expect(response.status).to eq 302
+          expect(response).to redirect_to root_path
+        end
+      end
+
+      describe 'employee logged with permissions' do
+        let!(:employee) { create(:employee, company: company, password: '1234', role: :admin) }
+
+        before { sign_in_employee }
+
+        it 'should redirect' do
+          expect(response.status).to eq 302
+        end
       end
     end
-  end
-  describe 'GET /companies/:id' do
-    let!(:company) { create(:company, user: user) }
+    describe 'GET /companies/:id' do
+      let!(:company) { create(:company, user: user) }
 
-    context 'user and company no authenticated' do
-      before { get "/companies/#{company.id}" }
+      context 'user and company no authenticated' do
+        before { get "/companies/#{company.id}" }
 
-      it 'redirect company login' do
-        expect(response.status).to eq 302
-        expect(response).to redirect_to new_company_session_path
-      end
-    end
-
-    context 'user authenticated' do
-      before do
-        sign_in user
-        get "/companies/#{company.id}"
+        it 'redirect company login' do
+          expect(response.status).to eq 302
+          expect(response).to redirect_to new_company_session_path
+        end
       end
 
-      it 'success' do
-        expect(assigns(:company)).to eq company
-        expect(response.status).to eq 200
-      end
-    end
+      context 'user authenticated' do
+        before do
+          sign_in user
+          get "/companies/#{company.id}"
+        end
 
-    context 'company authenticated' do
-      before do
-        sign_in company
-        get "/companies/#{company.id}"
+        it 'success' do
+          expect(assigns(:company)).to eq company
+          expect(response.status).to eq 200
+        end
       end
 
-      it 'success' do
-        expect(assigns(:company)).to eq company
-        expect(response.status).to eq 200
+      context 'company authenticated' do
+        before do
+          sign_in company
+          get "/companies/#{company.id}"
+        end
+
+        it 'success' do
+          expect(assigns(:company)).to eq company
+          expect(response.status).to eq 200
+        end
       end
     end
   end

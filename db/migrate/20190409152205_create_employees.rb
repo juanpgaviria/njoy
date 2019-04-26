@@ -13,6 +13,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.date :start_date
       t.binary :password
       t.references :company, foreign_key: true
+      t.integer :role, default: 0
 
       t.timestamps
     end

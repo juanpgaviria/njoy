@@ -2,11 +2,21 @@ require 'rails_helper'
 
 describe 'Employee signin process', type: :feature, js: true do
   let!(:company) { create(:company) }
-  let!(:employee) { create(:employee, company: company, password: '1234') }
-  before { sign_in company }
+  let!(:employee) { create(:employee, company: company, password: '1234', role: 'admin') }
+
+  before do
+    sign_in company
+  end
 
   it 'create and login employee flow' do
     visit '/'
+
+    click_link 'Empleado'
+    expect(page).to have_current_path(new_employees_session_path)
+
+    fill_in 'password', with: '1234'
+
+    click_button 'Entrar'
     click_link 'Empleados'
     click_link 'Crear empleado'
 
@@ -44,8 +54,8 @@ describe 'Employee signin process', type: :feature, js: true do
     end
     expect(page).to have_current_path(employee_path(Employee.last))
 
+    click_link "Salir #{employee.names}"
     click_link 'Empleado'
-    expect(page).to have_current_path(new_employees_session_path)
 
     within('form') do
       fill_in 'password', with: 'Dont let to write letters'
