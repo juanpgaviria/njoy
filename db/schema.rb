@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_152205) do
     t.date "start_date"
     t.binary "password"
     t.bigint "company_id"
+    t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_employees_on_company_id"
