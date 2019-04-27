@@ -17,3 +17,32 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require_tree .
+
+function growl(type, message) {
+  $('<div class="alert alert-' + type + '">' + message + '</div>')
+      .appendTo('body')
+      .delay(4000)
+      .fadeOut(4000, function() {
+        $(this).remove()
+      });
+}
+
+<% if Rails.env.test? %>
+  $(".fade").removeClass("fade");
+<% end %>
+
+$(document).on("turbolinks:load", function() {
+  $('[data-toggle="tooltip"]').tooltip();
+
+  <% unless Rails.env.test?  %>
+    $('.alert')
+      .delay(4000)
+      .fadeOut(4000, function() {
+        $(this).remove();
+      });
+  <% end %>
+
+  $('.alert').on("click", function() {
+    $(this).remove();
+  })
+});
