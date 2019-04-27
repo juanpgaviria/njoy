@@ -1,0 +1,13 @@
+.application-layout {
+  .navbar {
+    margin-bottom: 20px;
+  }
+
+  .alert-growl {
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    max-width: 500px;
+    z-index: 1000;
+  }
+}
