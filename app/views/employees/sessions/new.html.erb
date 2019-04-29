@@ -2,7 +2,7 @@
   <div class="col-6">
     <h1>Entrar como empleado</h1>
     <%= form_tag controller: :sessions, action: :create do %>
-      <div class="form-group pin">
+      <div class="form-group set-pin">
         <%= label_tag(:password, "Password") %>
         <%= password_field_tag(:password, nil, class: 'form-control input-lg') %>
       </div>
@@ -12,5 +12,5 @@
 </div>
 
 <script type="text/javascript">
-  new EmployeeForms();
+  new EmployeePin();
 </script>

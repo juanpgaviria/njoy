@@ -16,18 +16,9 @@ class Companies::RegistrationsController < Devise::RegistrationsController
     resource.save
     yield resource if block_given?
     if resource.persisted?
-      if resource.active_for_authentication?
-        set_flash_message! :notice, 'Restaurante creado exitosamente'
-        respond_with resource, location: after_sign_up_path_for(resource)
-      else
-        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
-        expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
-      end
+      resource_persisted(resource)
     else
-      clean_up_passwords resource
-      set_minimum_password_length
-      respond_with resource
+      resource_not_persisted(resource)
     end
   end
 
@@ -59,7 +50,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[user_id email name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[user_id email name identification phone])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -76,4 +67,30 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def resource_persisted(resource)
+    if resource.active_for_authentication?
+      create_first_employee(resource)
+      set_flash_message! :notice, 'Restaurante creado exitosamente'
+      respond_with resource, location: after_sign_up_path_for(resource)
+    else
+      set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+      expire_data_after_sign_in!
+      respond_with resource, location: after_inactive_sign_up_path_for(resource)
+    end
+  end
+end
+
+def resource_not_persisted(resource)
+  clean_up_passwords resource
+  set_minimum_password_length
+  respond_with resource
+end
+
+def create_first_employee(resource)
+  resource.employees.create!(names: resource.name, last_names: 'Admin', phone: resource.phone,
+                             identification: resource.identification, role: :admin,
+                             password: params[:password])
 end

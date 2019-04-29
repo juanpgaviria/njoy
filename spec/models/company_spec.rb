@@ -8,7 +8,9 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  name                   :string
+#  name                   :string(100)
+#  phone                  :string(100)
+#  identification         :string(100)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  user_id                :bigint(8)
