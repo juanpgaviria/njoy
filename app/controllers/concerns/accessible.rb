@@ -9,7 +9,7 @@ module Accessible
   def check_user
     if current_company
       flash.clear
-      redirect_to company_path(current_company)
+      redirect_to new_employees_session_path
     elsif current_user
       flash.clear
       redirect_to companies_path

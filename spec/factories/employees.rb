@@ -22,7 +22,7 @@
 
 FactoryBot.define do
   factory :employee do
-    names { Faker::Name.name }
+    names { Faker::Name.first_name }
     last_names { Faker::Name.last_name }
     address { Faker::Address.full_address }
     state { Faker::Address.state }

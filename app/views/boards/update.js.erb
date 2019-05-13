@@ -1,0 +1,10 @@
+<% if @board.errors.any? %>
+  <% @board.errors.each do |error| %>
+    growl('danger', error)
+  <% end %>
+<% else %>
+  $("#board-<%= @board.id %>").remove()
+  $('.dropzone').append('<%= j render @board %>')
+  $('#new-board').remove()
+  $('.modal-backdrop').remove()
+<% end %>

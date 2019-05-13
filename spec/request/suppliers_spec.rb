@@ -24,7 +24,7 @@ RSpec.describe 'Suppliers', type: :request do
 
       it 'should redirect' do
         expect(response.status).to eq 302
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to boards_path
       end
     end
 
@@ -42,7 +42,6 @@ RSpec.describe 'Suppliers', type: :request do
       end
 
       describe 'GET /suppliers/:id' do
-
         before { get "/suppliers/#{supplier.id}" }
 
         it 'success' do

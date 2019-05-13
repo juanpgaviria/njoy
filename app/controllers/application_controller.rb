@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def employee_sign_in(employee)
-    cookies[:employee_id] = { value: employee.id, expires: 10.minutes }
+    time_expiration = employee.admin? ? nil : 10.minutes
+    cookies.signed[:employee_id] = { value: employee.id, expires: time_expiration }
     @current_employee = employee
   end
 
@@ -34,7 +35,7 @@ class ApplicationController < ActionController::Base
 
   def current_employee
     @current_employee ||= if current_company && cookies[:employee_id]
-                            current_company.employees.find(cookies[:employee_id])
+                            current_company.employees.find(cookies.signed[:employee_id])
                           end
   rescue ActiveRecord::RecordNotFound
     nil

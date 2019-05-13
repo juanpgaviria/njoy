@@ -1,0 +1,53 @@
+<div class="modal fade" id="new-board" tabindex="-1" role="dialog" aria-labelledby="new-board-Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="new-board-Label"><%= @board.persisted? ? 'Editar Mesa' : 'Nueva Mesa' %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_for @board, remote: true do |f| %>
+        <%= hidden_field_tag 'from_form', true %>
+        <div class="modal-body">
+          <div class="form_group">
+            <%= f.label :number, 'Numero de mesa*'  %>
+            <%= f.number_field :number, class: 'form-control', required: true %>
+          </div>
+          <br>
+          <div class="form_group">
+            <div class="row">
+              <div class="col">
+                <%= f.label :width, 'Ancho' %>
+                <%= f.number_field :width, class: 'form-control', placeholder: 100, max: 500 %>
+              </div>
+              <div class="col">
+                <%= f.label :height, 'Alto' %>
+                <%= f.number_field :height, class: 'form-control', placeholder: 100, max: 500 %>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="form_group">
+            <div class="row">
+              <div class="col">
+                <%= f.label :pos_x, 'Posicion eje X' %>
+                <%= f.number_field :pos_x, { class: 'form-control', placeholder: 100, max: 800 } %>
+              </div>
+              <div class="col">
+                <%= f.label :pos_y, 'Posicion eje Y' %>
+                <%= f.number_field :pos_y, class: 'form-control', placeholder: 100, max: 800 %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <%= link_to 'Borrar', @board, method: :delete, class: 'btn btn-danger float-right',
+                data: { confirm: 'Estas seguro de borrar esta mesa?' }, remote: true %>
+          <%= f.submit @board.persisted? ? 'Editar' : 'Crear', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

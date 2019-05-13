@@ -33,7 +33,7 @@ RSpec.describe 'Categories', type: :request do
 
       it 'should redirect' do
         expect(response.status).to eq 302
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to boards_path
       end
     end
 

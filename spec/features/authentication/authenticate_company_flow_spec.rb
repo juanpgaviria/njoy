@@ -13,7 +13,7 @@ describe 'Company signin process', type: :feature, js: true do
       fill_in 'company_password', with: company.password
     end
     click_button 'Entrar'
-    expect(page).to have_current_path(company_path(company.id))
+    expect(page).to have_current_path(new_employees_session_path)
     within('.ml-auto') do
       find('.dropdown-toggle').click
       click_link 'Salir'

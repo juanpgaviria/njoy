@@ -33,7 +33,7 @@ RSpec.describe 'Employees sessions', type: :request do
 
         it 'should create a session' do
           expect(response.status).to eq 302
-          expect(response.cookies['employee_id']).to eq employee.id.to_s
+          expect(response.cookies['employee_id']).to_not be_nil
           expect(assigns(:current_employee)).to eq employee
         end
       end

@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Employee signin process', type: :feature, js: true do
   let!(:company) { create(:company) }
   let!(:employee) { create(:employee, company: company, password: '1234', role: 'admin') }
+  # let!(:boards) { create_list(:board, 10, company: company) }
 
   before do
     sign_in company
@@ -22,7 +23,7 @@ describe 'Employee signin process', type: :feature, js: true do
 
     expect(page).to have_current_path(new_employee_path)
     within('form#new_employee') do
-      fill_in 'employee_names', with: Faker::Name.name
+      fill_in 'employee_names', with: Faker::Name.first_name
       fill_in 'employee_last_names', with: Faker::Name.last_name
       fill_in 'employee_phone', with: Faker::PhoneNumber.phone_number
       fill_in 'employee_email', with: Faker::Internet.email
@@ -66,8 +67,8 @@ describe 'Employee signin process', type: :feature, js: true do
     end
     expect(page).to have_content('Pin incorrecto')
     click_button 'Entrar'
-    expect(page).to have_current_path(company_path(company.id))
+    expect(page).to have_current_path(boards_path)
     click_link "Salir #{Employee.last.names}"
-    expect(page).to have_current_path(company_path(company.id))
+    expect(page).to have_current_path(new_employees_session_path)
   end
 end
