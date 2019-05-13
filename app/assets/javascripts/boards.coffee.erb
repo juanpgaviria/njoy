@@ -1,0 +1,107 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+class DragAndDrop
+  constructor: () ->
+    @position = { x: 0, y: 0 }
+    @initializeDraggable()
+
+  initializeDraggable: () ->
+    interact('.draggable')
+      .draggable
+        # keep the element within the area of it's parent
+        modifiers: [
+          interact.modifiers.snap({
+            targets: [
+              interact.createSnapGrid({ x: 20, y: 20 })
+            ],
+            range: Infinity,
+            relativePoints: [ { x: 0, y: 0 } ]
+          }),
+          interact.modifiers.restrict({
+            restriction: '.dropzone',
+            elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+            endOnly: true
+          })
+        ],
+        inertia: true
+        listeners:
+          move: @dragMoveListener
+          end: @updateBoardPosition
+      .resizable
+        snapEdges: {
+          targets: [ interact.snappers.grid({ x: 10, y: 10 }) ]
+        }
+        edges: { left: true, right: true, bottom: true, top: true }
+        modifiers: [
+          # keep the edges inside the parent
+          interact.modifiers.restrictEdges({ outer: 'parent', endOnly: true })
+          # minimum size
+          interact.modifiers.restrictSize({
+            min: { width: 50, height: 50 },
+            max: { width: 300, height: 300 }
+          })
+        ]
+        inertia: true
+      .on('resizemove', @resizeMoveListener)
+      .on('resizeend', @updateBoardSize)
+
+  resizeMoveListener: (event) =>
+    target = event.target
+    @position.x = parseFloat(target.getAttribute('data-x')) || 0
+    @position.y = parseFloat(target.getAttribute('data-y')) || 0
+    # update the element's style
+    target.style.width  = event.rect.width + 'px'
+    target.style.height = event.rect.height + 'px'
+    # translate when resizing from top or left edges
+    @position.x += event.deltaRect.left
+    @position.y += event.deltaRect.top
+    target.style.transform =
+      'translate(' + @position.x + 'px, ' + @position.y + 'px)'
+    target.setAttribute('data-x', @position.x)
+    target.setAttribute('data-y', @position.y)
+    target.textContent =
+      Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+
+  dragMoveListener: (event) =>
+    target = event.target
+    @position.x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+    @position.y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+    target.style.transform =
+      'translate(' + @position.x + 'px, ' + @position.y + 'px)'
+    target.setAttribute('data-x', @position.x)
+    target.setAttribute('data-y', @position.y)
+
+  updateBoardSize: (event) =>
+    data = "board[width]=#{event.rect.width}&board[height]=#{event.rect.height}&
+            board[pos_x]=#{@position.x}&board[pos_y]=#{@position.y}&
+            board[from_form]=false
+            "
+    @update_board(event.currentTarget, data)
+
+  updateBoardPosition: (event) =>
+    data = "board[pos_x]=#{@position.x}&board[pos_y]=#{@position.y}&
+      board[from_form]=false"
+    @update_board(event.currentTarget, data)
+
+  update_board: (target, data) ->
+    Rails.ajax
+      type: 'PUT'
+      url: target.dataset.updateUrl
+      dataType: 'json'
+      accept: 'json'
+      data: data
+
+class EditBoard
+  constructor: () ->
+    $('.dropzone').on('dblclick', '.draggable', @editBoard)
+
+  editBoard: (event, data) ->
+    Rails.ajax
+      type: 'GET'
+      url: event.currentTarget.dataset.editUrl
+
+
+window.EditBoard = EditBoard
+window.DragAndDrop = DragAndDrop

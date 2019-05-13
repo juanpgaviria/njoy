@@ -1,5 +1,7 @@
 user = User.create!(email: 'jeffe.bernal@gmail.com', password: 'test1234')
-company = user.companies.create!(email: 'njoy@njoy.com', password: 'test1234', name: 'hotwings')
+company = user.companies.create!(email: 'njoy@njoy.com', password: 'test1234', name: 'hotwings',
+                                 phone: Faker::PhoneNumber.phone_number,
+                                 identification: Faker::Number.number(10))
 category = company.categories.create!(name: 'licores fuertes', description: 'licores para fiestas')
 supplier = company.suppliers.create!(identification: Faker::Company.spanish_organisation_number,
                                      name: Faker::Company.name, city: Faker::Address.city,
@@ -15,7 +17,8 @@ company.products.create!(name: 'ron', description: 'el mejor licor de antioquia'
 company.employees.create!(names: 'jefferson', last_names: 'bernal cardona', city: 'Medellin',
                           address: 'calle 19 #47 - 15', state: 'Antioquia', phone: '2798984',
                           identification: '112849045', email: 'jeffebernalster@gmail.com',
-                          birthday: '01/09/1990', start_date: Date.today, password: '1234')
+                          birthday: '01/09/1990', start_date: Date.today, password: '1234',
+                          role: :admin)
 5.times do
   company.employees.create!(names: Faker::Name.name, last_names: Faker::Name.last_name,
                             address: Faker::Address.full_address, state: Faker::Address.state,

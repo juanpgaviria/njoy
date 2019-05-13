@@ -1,0 +1,9 @@
+<% if @board.errors.any? %>
+  <% @board.errors.each do |error| %>
+    growl('alert', error)
+  <% end %>
+<% else %>
+  $('.dropzone').append('<%= j render @board %>')
+  $('#new-board').remove()
+  $('.modal-backdrop').remove()
+<% end %>

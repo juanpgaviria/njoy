@@ -31,7 +31,23 @@ RSpec.describe 'Homes', type: :request do
 
       it 'redirect to company' do
         expect(response.status).to eq 302
-        expect(response).to redirect_to(company_path(company))
+        expect(response).to redirect_to(new_employees_session_path)
+      end
+    end
+
+    context 'employee authenticated' do
+      let!(:company) { create(:company) }
+      let!(:employee) { create(:employee, company: company, password: '1234') }
+
+      before do
+        sign_in company
+        sign_in_employee
+        get '/'
+      end
+
+      it 'redirect to company' do
+        expect(response.status).to eq 302
+        expect(response).to redirect_to(boards_path)
       end
     end
   end

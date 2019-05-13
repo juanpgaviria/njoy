@@ -5,7 +5,7 @@ class Employees::SessionsController < ApplicationController
     employee = current_company.employees.find_by_password(encrypted_password)
     if employee
       employee_sign_in(employee)
-      redirect_to root_path
+      redirect_to boards_path
     else
       flash[:alert] = 'Pin incorrecto'
       render :new

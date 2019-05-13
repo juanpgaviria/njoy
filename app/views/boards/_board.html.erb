@@ -1,0 +1,10 @@
+<%= content_tag :div, board.number,
+                class: "board #{board.draggable?(controller_name, action_name)} #{board.board_color}",
+                id: "board-#{board.id}",
+                data: { draggable: true,
+                        update_url: board_path(board),
+                        edit_url: edit_board_path(board),
+                        x: board.pos_x,
+                        y: board.pos_y },
+                style: "transform:translate(#{board.pos_x}px,#{board.pos_y}px);
+                        width:#{board.width}px;height:#{board.height}px;" %>

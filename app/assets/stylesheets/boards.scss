@@ -1,0 +1,44 @@
+// Place all the styles related to the board controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.boards {
+  max-width: 100%;
+  .dropzone {
+    position: fixed;
+    top: 56px;
+    left: 15%;
+    background-color: #ccc;
+    width: 85%;
+    height: 94%;
+  }
+
+  .info {
+    margin-left: -100px;
+  }
+
+  .draggable {
+    touch-action: none;
+    user-select: none;
+  }
+
+  .board {
+    width: 100px;
+    height: 100px;
+    background-color: #2196F3;
+    color: white;
+    padding:0px;
+    position: absolute;
+  }
+
+  .free {
+    background-color: green;
+  }
+
+  .bussy {
+    background-color: blue;
+  }
+
+  .with_order {
+    background-color: red;
+  }
+}
