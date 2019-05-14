@@ -1,52 +1,54 @@
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <h1 class = "text-center"><%= action %> proveedor</h1>
-    <%= form_for @supplier do |supplier| %>
-      <% if @supplier.errors.any? %>
-        <div id="errors_explanation">
-          <h2><%= pluralize(@supplier.errors.count,"error") %> No se pudo guardar este proveedor:</h2>
-          <ul>
-            <% @supplier.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class = "text-center"><%= action %> proveedor</h1>
+      <%= form_for @supplier do |supplier| %>
+        <% if @supplier.errors.any? %>
+          <div id="errors_explanation">
+            <h2><%= pluralize(@supplier.errors.count,"error") %> No se pudo guardar este proveedor:</h2>
+            <ul>
+              <% @supplier.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= supplier.label :name %>
+          <%= supplier.text_field :name, class: "form-control", placeholder: 'Nombre de Empresa' %>
+        </div>
+
+        <div class="form-group">
+          <%= supplier.label :address %>
+          <%= supplier.text_field :address, class: "form-control", placeholder: 'Dirección' %>
+        </div>
+
+        <div class="form-group">
+          <%= supplier.label :city %>
+          <%= supplier.text_field :city, class: "form-control", placeholder: 'Ciudad' %>
+        </div>
+
+        <div class="form-group">
+          <%= supplier.label :phone %>
+          <%= supplier.telephone_field :phone, class: "form-control", placeholder: 'Numero Celular'  %>
+        </div>
+
+        <div class="form-group">
+          <%= supplier.label :identification %>
+          <%= supplier.text_field :identification, class: "form-control", placeholder: 'NIT' %>
+        </div>
+
+        <div class="form-group">
+          <%= supplier.label :contact_name %>
+          <%= supplier.text_field :contact_name, class: "form-control", placeholder: 'Nombre de Contacto' %>
+        </div>
+
+        <div class="actions">
+          <%= link_to 'Cancelar', suppliers_path, class: 'btn btn-default' %>
+          <%= supplier.submit 'Guardar', class: 'btn btn-primary' %>
         </div>
       <% end %>
-
-      <div class="form-group">
-        <%= supplier.label :name %>
-        <%= supplier.text_field :name, class: "form-control", placeholder: 'Nombre de Empresa' %>
-      </div>
-
-      <div class="form-group">
-        <%= supplier.label :address %>
-        <%= supplier.text_field :address, class: "form-control", placeholder: 'Dirección' %>
-      </div>
-
-      <div class="form-group">
-        <%= supplier.label :city %>
-        <%= supplier.text_field :city, class: "form-control", placeholder: 'Ciudad' %>
-      </div>
-
-      <div class="form-group">
-        <%= supplier.label :phone %>
-        <%= supplier.telephone_field :phone, class: "form-control", placeholder: 'Numero Celular'  %>
-      </div>
-
-      <div class="form-group">
-        <%= supplier.label :identification %>
-        <%= supplier.text_field :identification, class: "form-control", placeholder: 'NIT' %>
-      </div>
-
-      <div class="form-group">
-        <%= supplier.label :contact_name %>
-        <%= supplier.text_field :contact_name, class: "form-control", placeholder: 'Nombre de Contacto' %>
-      </div>
-
-      <div class="actions">
-        <%= link_to 'Cancelar', suppliers_path, class: 'btn btn-default' %>
-        <%= supplier.submit 'Guardar', class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>

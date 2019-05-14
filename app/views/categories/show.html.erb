@@ -1,36 +1,38 @@
-<div class="jumbotron">
-  <h1 class="display-4"><%= @category.name.titleize %></h1>
-  <p class="lead"><%= @category.description.capitalize %></p>
-  <%= link_to 'Categorías', categories_path, class: 'btn btn-primary' %>
-  <%= link_to 'Crear categoría', new_category_path, class: 'btn btn-success' %>
-</div>
-<div class="row justify-content-center">
-  <div class="col-12">
-    <div class="d-flex justify-content-between align-items-center">
-      <h3 class="text-center">Productos</h3>
-      <%= link_to 'Crear producto', new_product_path, class: 'btn btn-primary float-right' %>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Cantidad</th>
-          <th>Precio unitario</th>
-          <th>Descripción</th>
-          <th>Marca</th>
-          <th>Categoria</th>
-          <th>Proveedor</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @category.products.empty? %>
-          <tr><td class='text-center'>No hay productos creadas aun</td></tr>
-        <% else %>
-          <%= render @category.products %>
-        <% end %>
-      </tbody>
-    </table>
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4"><%= @category.name.titleize %></h1>
+    <p class="lead"><%= @category.description.capitalize %></p>
+    <%= link_to 'Categorías', categories_path, class: 'btn btn-primary' %>
+    <%= link_to 'Crear categoría', new_category_path, class: 'btn btn-success' %>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3 class="text-center">Productos</h3>
+        <%= link_to 'Crear producto', new_product_path, class: 'btn btn-primary float-right' %>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Descripción</th>
+            <th>Marca</th>
+            <th>Categoria</th>
+            <th>Proveedor</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @category.products.empty? %>
+            <tr><td class='text-center'>No hay productos creadas aun</td></tr>
+          <% else %>
+            <%= render @category.products %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>  
 </div>

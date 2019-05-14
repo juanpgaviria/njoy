@@ -1,39 +1,41 @@
-<div class="jumbotron">
-  <h1 class="display-4"><%= @supplier.name.titleize %></h1>
-  <p><strong>Direccion: </strong><%= @supplier.address.capitalize %></p>
-  <p><strong>Ciudad: </strong><%= @supplier.city.titleize %></p>
-  <p><strong>Telefono: </strong><%= @supplier.phone %></p>
-  <p><strong>Nombre de contacto: </strong><%= @supplier.contact_name.titleize %></p>
-  <%= link_to 'Nuevo Proveedor', new_supplier_path, class: 'btn btn-primary' %>
-  <%= link_to 'Proveedores', suppliers_path, class: 'btn btn-success' %>
-</div>
-<div class="row justify-content-center">
-  <div class="col-12">
-    <div class="d-flex justify-content-between align-items-center">
-      <h3 class="text-center">Productos</h3>
-      <%= link_to 'Crear producto', new_product_path, class: 'btn btn-primary float-right' %>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Cantidad</th>
-          <th>Precio unitario</th>
-          <th>Descripción</th>
-          <th>Marca</th>
-          <th>Categoria</th>
-          <th>Proveedor</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @supplier.products.empty? %>
+<div class="container">  
+  <div class="jumbotron">
+    <h1 class="display-4"><%= @supplier.name.titleize %></h1>
+    <p><strong>Direccion: </strong><%= @supplier.address.capitalize %></p>
+    <p><strong>Ciudad: </strong><%= @supplier.city.titleize %></p>
+    <p><strong>Telefono: </strong><%= @supplier.phone %></p>
+    <p><strong>Nombre de contacto: </strong><%= @supplier.contact_name.titleize %></p>
+    <%= link_to 'Nuevo Proveedor', new_supplier_path, class: 'btn btn-primary' %>
+    <%= link_to 'Proveedores', suppliers_path, class: 'btn btn-success' %>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3 class="text-center">Productos</h3>
+        <%= link_to 'Crear producto', new_product_path, class: 'btn btn-primary float-right' %>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Descripción</th>
+            <th>Marca</th>
+            <th>Categoria</th>
+            <th>Proveedor</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @supplier.products.empty? %>
           <tr><td class='text-center'>No hay productos creadas aun</td></tr>
-        <% else %>
+          <% else %>
           <%= render @supplier.products %>
-        <% end %>
-      </tbody>
-    </table>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

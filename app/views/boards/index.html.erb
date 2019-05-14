@@ -1,16 +1,18 @@
 <div class="boards">
-  <div class="row">
-    <div class="col-1">
-      <div class="info">
-        <ul>
-          <li>Verde: Libre</li>
-          <li>Roja: Con orden</li>
-          <li>Azul: Ocupada</li>
-        </ul>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+        <div>
+          <ul>
+            <li>Verde: Libre</li>
+            <li>Roja: Con orden</li>
+            <li>Azul: Ocupada</li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="col-11">
-      <%= render @boards %>
+      <div class="col-10">
+        <%= render @boards %>
+      </div>
     </div>
   </div>
 </div>

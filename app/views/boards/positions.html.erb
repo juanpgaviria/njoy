@@ -1,24 +1,25 @@
 <div class="boards">
-  <div class="row">
-    <div class="col-1">
-      <div class="info">
-        <h5 class="text-center"><strong>Acciones</strong></h5>
-        <ul>
-          <li>Puedes arrastrar las mesas</li>
-          <li>Puedes ajustar las dimensiones de la mesa</li>
-          <li>Doble click en la mesa para editar</li>
-        </ul>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+        <div class="info">
+          <h5 class="text-center"><strong>Acciones</strong></h5>
+          <ul>
+            <li>Puedes arrastrar las mesas</li>
+            <li>Puedes ajustar las dimensiones de la mesa</li>
+            <li>Doble click en la mesa para editar</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-10">
+        <div class="dropzone" id="dropzone">
+          <%= render @boards %>
+        </div>
       </div>
     </div>
-    <div class="col-11">
-      <div class="dropzone" id="dropzone">
-        <%= render @boards %>
-      </div>
-    </div>
+  <div class="modal-window"></div>
   </div>
 </div>
-
-<div class="modal-window"></div>
 
 <script type="text/javascript">
   new DragAndDrop();

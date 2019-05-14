@@ -1,14 +1,16 @@
-<div class="jumbotron">
-  <h1 class="display-4">Nombres: <%= @employee.names %></h1>
-  <p><strong>Apellidos: </strong><%= @employee.last_names.titleize %></p>
-  <p><strong>Cédula: </strong><%= @employee.identification %></p>
-  <p><strong>Numero de contacto: </strong><%= @employee.phone %></p>
-  <p><strong>Dirección: </strong><%= @employee.address %></p>
-  <p><strong>Departamento: </strong><%= @employee.state %></p>
-  <p><strong>Ciudad: </strong><%= @employee.city %></p>
-  <p><strong>Correo: </strong><%= @employee.email %></p>
-  <p><strong>Fecha de Nacimiento: </strong><%= @employee.birthday %></p>
-  <p><strong>Fecha de Ingreso: </strong><%= @employee.start_date %></p>
-  <%= link_to 'Empleados', employees_path, class: 'btn btn-primary' %>
-  <%= link_to 'Crear empleado', new_employee_path, class: 'btn btn-primary' %>
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Nombres: <%= @employee.names %></h1>
+    <p><strong>Apellidos: </strong><%= @employee.last_names.titleize %></p>
+    <p><strong>Cédula: </strong><%= @employee.identification %></p>
+    <p><strong>Numero de contacto: </strong><%= @employee.phone %></p>
+    <p><strong>Dirección: </strong><%= @employee.address %></p>
+    <p><strong>Departamento: </strong><%= @employee.state %></p>
+    <p><strong>Ciudad: </strong><%= @employee.city %></p>
+    <p><strong>Correo: </strong><%= @employee.email %></p>
+    <p><strong>Fecha de Nacimiento: </strong><%= @employee.birthday %></p>
+    <p><strong>Fecha de Ingreso: </strong><%= @employee.start_date %></p>
+    <%= link_to 'Empleados', employees_path, class: 'btn btn-primary' %>
+    <%= link_to 'Crear empleado', new_employee_path, class: 'btn btn-primary' %>
+  </div>  
 </div>

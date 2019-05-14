@@ -1,29 +1,31 @@
-<div class="row justify-content-center">
-  <div class="col-12">
-    <div class="d-flex justify-content-between align-items-center">
-      <h1 class="text-center">Empleados</h1>
-      <%= link_to 'Crear empleado', new_employee_path, class: 'btn btn-primary float-right' %>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombres</th>
-          <th>Apellidos</th>
-          <th>Celular</th>
-          <th>Dirección</th>
-          <th>Email</th>
-          <th>Nacimiento</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @employees.empty? %>
+<div class="container">  
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-center">Empleados</h1>
+        <%= link_to 'Crear empleado', new_employee_path, class: 'btn btn-primary float-right' %>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Celular</th>
+            <th>Dirección</th>
+            <th>Email</th>
+            <th>Nacimiento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @employees.empty? %>
           <tr><td class='text-center'>No hay empleados aun</td></tr>
-        <% else %>
+          <% else %>
           <%= render @employees %>
-        <% end %>
-      </tbody>
-    </table>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

@@ -1,26 +1,28 @@
-<div class="row justify-content-center">
-  <div class="col-12">
-    <div class="d-flex justify-content-around align-items-center">
-      <h1 class="text-center">Restaurantes</h1>
-      <%= link_to 'Crear Restaurante', new_company_registration_path, class: 'btn btn-primary float-right' %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="d-flex justify-content-around align-items-center">
+        <h1 class="text-center">Restaurantes</h1>
+        <%= link_to 'Crear Restaurante', new_company_registration_path, class: 'btn btn-primary float-right' %>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Contrasena</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @companies.empty? %>
+            <tr><td class='text-center'>No hay restaurantes creados aun</td></tr>
+          <% else %>
+            <%= render @companies %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Contrasena</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @companies.empty? %>
-          <tr><td class='text-center'>No hay restaurantes creados aun</td></tr>
-        <% else %>
-          <%= render @companies %>
-        <% end %>
-      </tbody>
-    </table>
   </div>
 </div>

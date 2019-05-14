@@ -1,59 +1,61 @@
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <h1 class = "text-center"><%= action %> producto</h1>
-    <%= form_for(@product) do |product| %>
-      <% if @product.errors.any? %>
-        <div id="errors_explanation">
-          <h2><%= pluralize(@product.errors.count,"error") %> No se pudo guardar este producto:</h2>
-          <ul>
-            <% @product.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class = "text-center"><%= action %> producto</h1>
+      <%= form_for(@product) do |product| %>
+        <% if @product.errors.any? %>
+          <div id="errors_explanation">
+            <h2><%= pluralize(@product.errors.count,"error") %> No se pudo guardar este producto:</h2>
+            <ul>
+              <% @product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= product.label :supplier_id %>
+          <%= product.collection_select(:supplier_id, current_company.suppliers, :id, :name, { prompt:"Proveedor" }, { class: 'form-control'}) %>
+          <%= link_to 'Crear proveedor', new_supplier_path %>
+        </div>
+
+        <div class="form-group">
+          <%= product.label :category_id %>
+          <%= product.collection_select(:category_id, current_company.categories, :id, :name, { prompt:"Categoría" }, { class: 'form-control'}) %>
+          <%= link_to 'Crear categoría', new_category_path %>
+        </div>
+
+        <div class="form-group">
+          <%= product.label :name %>
+          <%= product.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= product.label :precio %>
+          <%= product.number_field :price, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= product.label :quantity %>
+          <%= product.number_field :quantity, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= product.label :brand %>
+          <%= product.text_field :brand, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= product.label :description %>
+          <%= product.text_area :description, class: "form-control" %>
+        </div>
+
+        <div class="actions">
+          <%= link_to 'Cancelar', products_path, class: 'btn btn-default' %>
+          <%= product.submit 'Guardar', class: 'btn btn-primary' %>
         </div>
       <% end %>
-
-      <div class="form-group">
-        <%= product.label :supplier_id %>
-        <%= product.collection_select(:supplier_id, current_company.suppliers, :id, :name, { prompt:"Proveedor" }, { class: 'form-control'}) %>
-        <%= link_to 'Crear proveedor', new_supplier_path %>
-      </div>
-
-      <div class="form-group">
-        <%= product.label :category_id %>
-        <%= product.collection_select(:category_id, current_company.categories, :id, :name, { prompt:"Categoría" }, { class: 'form-control'}) %>
-        <%= link_to 'Crear categoría', new_category_path %>
-      </div>
-      
-      <div class="form-group">
-        <%= product.label :name %>
-        <%= product.text_field :name, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= product.label :precio %>
-        <%= product.number_field :price, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= product.label :quantity %>
-        <%= product.number_field :quantity, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= product.label :brand %>
-        <%= product.text_field :brand, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= product.label :description %>
-        <%= product.text_area :description, class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= link_to 'Cancelar', products_path, class: 'btn btn-default' %>
-        <%= product.submit 'Guardar', class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-  </div>
+    </div>
+  </div>  
 </div>
