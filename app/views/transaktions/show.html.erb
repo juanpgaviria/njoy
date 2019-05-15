@@ -1,0 +1,7 @@
+<div class="jumbotron">
+  <h1 class="display-4">Transacción #<%= @transaktion.id %></h1>
+  <p><strong>Tipo: </strong><%= @transaktion.kind.capitalize %></p>
+  <p><strong>Cantidad: </strong><%= @transaktion.quantity %></p>
+  <%= link_to 'Transacciónes', transaktions_path, class: 'btn btn-primary' %>
+  <%= link_to 'Nueva transacción', new_transaktion_path, class: 'btn btn-success' %>
+</div>

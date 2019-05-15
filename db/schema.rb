@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_01_180044) do
+ActiveRecord::Schema.define(version: 2019_05_02_195331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,19 @@ ActiveRecord::Schema.define(version: 2019_05_01_180044) do
     t.index ["company_id"], name: "index_suppliers_on_company_id"
   end
 
+  create_table "transaktions", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "kind", default: 0
+    t.bigint "employee_id"
+    t.bigint "company_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_transaktions_on_company_id"
+    t.index ["employee_id"], name: "index_transaktions_on_employee_id"
+    t.index ["product_id"], name: "index_transaktions_on_product_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -122,4 +135,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_180044) do
   add_foreign_key "products", "companies"
   add_foreign_key "products", "suppliers"
   add_foreign_key "suppliers", "companies"
+  add_foreign_key "transaktions", "companies"
+  add_foreign_key "transaktions", "employees"
+  add_foreign_key "transaktions", "products"
 end

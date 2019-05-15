@@ -21,6 +21,7 @@ class Company < ApplicationRecord
   has_many :suppliers, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :employees, dependent: :destroy
+  has_many :transaktions, dependent: :destroy
   has_many :boards, dependent: :destroy
 
   # Include default devise modules. Others available are:

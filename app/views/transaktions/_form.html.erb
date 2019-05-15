@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h1 class = "text-center"><%= action %> transacción </h1>
+    <%= form_for(@transaktion) do |t| %>
+      <% if @transaktion.errors.any? %>
+        <div id="errors_explanation">
+          <h2><%= pluralize(@transaktion.errors.count,"error") %> No se pudo guardar esta transacción:</h2>
+          <ul>
+            <% @transaktion.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= t.label "Producto" %>
+        <%= t.collection_select(:product_id, current_company.products, :id, :name, { prompt:"Producto" }, { class: 'form-control'}) %>
+        <%= link_to 'Crear producto', new_product_path %>
+      </div>
+
+      <div class="form-group kind-select">
+        <%= t.label "Estado" %>
+        <%= t.select :kind, Transaktion.kinds.keys.map{ |w| [w.humanize, w] }, {}, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= t.label "Cantidad" %>
+        <%= t.number_field :quantity, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= t.hidden_field :employee_id, :value => @current_employee.id %>
+      </div>
+
+      <div class="actions">
+        <%= link_to 'Cancelar', transaktions_path, class:'btn btn-default' %>
+        <%= t.submit 'Guardar', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
