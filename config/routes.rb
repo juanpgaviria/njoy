@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :products
   resources :suppliers
+  resources :transaktions, only: %i[index show new create]
   resources :boards, except: :show do
     get 'positions', to: 'boards#positions', on: :collection
   end

@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="text-center">Transacciones</h1>
+      <%= link_to 'Crear transaccion', new_transaktion_path, class: 'btn btn-primary float-right' %>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Producto</th>
+          <th>Estado</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @transaktions.empty? %>
+          <tr><td class='text-center'>No hay transacciones creadas aun</td></tr>
+        <% else %>
+          <%= render @transaktions %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

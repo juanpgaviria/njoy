@@ -16,6 +16,7 @@
 #
 
 class Product < ApplicationRecord
+  has_many :transaktions
   belongs_to :category
   belongs_to :supplier
   belongs_to :company
