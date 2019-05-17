@@ -20,6 +20,8 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :supplier
   belongs_to :company
+  has_many :menu_items
+  has_many :menus, through: :menu_items
 
   validates :name, :quantity, :price, :description, :brand, presence: true
 end

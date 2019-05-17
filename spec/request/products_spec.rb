@@ -38,10 +38,21 @@ RSpec.describe 'Products', type: :request do
       before { sign_in_employee }
 
       describe 'GET /products' do
-        before { get '/products' }
         it 'success' do
+          get '/products'
           expect(response.status).to eq 200
           expect(assigns(:products).count).to eq 10
+        end
+
+        it 'return a json object' do
+          get '/products.json', xhr: true, params: { 'columns[0][data]': 'name',
+                                                     'columns[0][search][regex]': false }
+          expect(response.status).to eq 200
+          hash_response = nil
+          expect {
+            hash_response = JSON.parse(response.body).with_indifferent_access
+          }.to_not raise_exception
+          expect(hash_response[:recordsTotal]).to eq 10
         end
       end
 

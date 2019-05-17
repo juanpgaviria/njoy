@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
 
   def index
     @products = current_company.products
+    respond_to do |format|
+      format.html
+      format.json { render json: ProductDatatable.new(params, current_company: current_company) }
+    end
   end
 
   def new

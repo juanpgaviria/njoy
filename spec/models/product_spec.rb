@@ -21,6 +21,8 @@ RSpec.describe Product, type: :model do
   it { should belong_to(:company) }
   it { should belong_to(:supplier) }
   it { should belong_to(:category) }
+  it { should have_many(:menu_items) }
+  it { should have_many(:menus).through(:menu_items) }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:price) }
   it { should validate_presence_of(:brand) }
