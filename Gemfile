@@ -7,9 +7,13 @@ ruby '2.6.0'
 
 # Styling rails c
 gem 'annotate'
+# datatables, filtering
+gem 'ajax-datatables-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
+# Nested forms
+gem 'cocoon'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Authentication
@@ -20,6 +24,8 @@ gem 'draper'
 gem 'hirb'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+# datatables, filtering
+gem 'jquery-datatables'
 gem 'jquery-rails'
 
 # Use postgresql as the database for Active Record
@@ -34,6 +40,8 @@ gem 'rails', '~> 5.2.2'
 # gem 'rails-assets-interactjs', source: 'https://rails-assets.org'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# select2 js, for select with search field
+gem 'select2-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Use Uglifier as compressor for JavaScript assets

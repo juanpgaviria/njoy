@@ -46,6 +46,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    redirect_to root_path, notice: 'No tienes acceso a este recurso'
+    redirect_to boards_path, notice: 'No tienes acceso a este recurso'
   end
 end

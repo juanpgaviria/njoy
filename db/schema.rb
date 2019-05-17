@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_02_195331) do
+ActiveRecord::Schema.define(version: 2019_05_14_191047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_05_02_195331) do
     t.integer "width"
     t.integer "height"
     t.bigint "company_id"
-    t.integer "status", default: 0
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_boards_on_company_id"
@@ -71,6 +71,27 @@ ActiveRecord::Schema.define(version: 2019_05_02_195331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_employees_on_company_id"
+  end
+
+  create_table "menu_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "product_id"
+    t.bigint "menu_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_menu_items_on_menu_id"
+    t.index ["product_id"], name: "index_menu_items_on_product_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.bigint "company_id"
+    t.string "name"
+    t.bigint "category_id"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_menus_on_category_id"
+    t.index ["company_id"], name: "index_menus_on_company_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -131,6 +152,10 @@ ActiveRecord::Schema.define(version: 2019_05_02_195331) do
   add_foreign_key "categories", "companies"
   add_foreign_key "companies", "users"
   add_foreign_key "employees", "companies"
+  add_foreign_key "menu_items", "menus"
+  add_foreign_key "menu_items", "products"
+  add_foreign_key "menus", "categories"
+  add_foreign_key "menus", "companies"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "companies"
   add_foreign_key "products", "suppliers"

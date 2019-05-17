@@ -1,0 +1,61 @@
+<div class="menus container">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <h1 class = "text-center"><%= action %> plato del menu</h1>
+      <%= form_for(@menu) do |f| %>
+        <% if @menu.errors.any? %>
+          <div id="errors_explanation">
+            <h2><%= pluralize(@menu.errors.count,"error") %> No se pudo guardar este menu:</h2>
+            <ul>
+              <% @menu.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <%= f.label :name, 'Nombre' %>
+              <%= f.text_field :name, class: 'form-control', placeholder: 'Nombre del plato', required: true %>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <%= f.label :price, 'Precio' %>
+              <%= f.number_field :price, class: 'form-control', placeholder: 'Precio del plato', required: true %>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-group">
+              <%= f.label :category_id, 'Categoría' %>
+              <%= f.collection_select(:category_id, @categories, :id, :name, { prompt:"Categoría" }, { class: 'form-control' }) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="nested-header">
+          <%= f.label 'Productos que componen este plato' %>
+          <%= link_to_add_association '<i class="fas fa-plus"></i>'.html_safe, f,
+                :menu_items, partial: 'menu_items/menu_item_fields',
+                data: { association_insertion_node: '.menu-items', association_insertion_method: :append } %>
+        </div>
+
+        <div class="menu-items">
+          <%= f.fields_for :menu_items do |ff| %>
+            <%= render 'menu_items/menu_item_fields', f: ff %>
+          <% end %>
+        </div>
+
+        <div class="actions">
+          <%= link_to 'Cancelar', menus_path, class: 'btn btn-default' %>
+          <%= f.submit 'Guardar', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  new SearchSelect();
+</script>

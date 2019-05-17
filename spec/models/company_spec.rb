@@ -24,6 +24,7 @@ RSpec.describe Company, type: :model do
   it { should have_many(:categories) }
   it { should have_many(:suppliers) }
   it { should have_many(:employees) }
+  it { should have_many(:menus) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:name) }
 end

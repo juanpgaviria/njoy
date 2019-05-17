@@ -18,6 +18,12 @@ AllCops:
     - 'bin/*'
     - 'app/channels/application_cable/**'
     - 'vendor/**/*'
+    - 'lib/templates/rails/jbuilder/index.json.jbuilder'
+
+Naming/AccessorMethodName:
+  Exclude:
+    - app/datatables/*
+
 Metrics/ModuleLength:
   Exclude:
     - 'spec/**/*'
