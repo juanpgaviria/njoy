@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_191047) do
     t.integer "width"
     t.integer "height"
     t.bigint "company_id"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_boards_on_company_id"
