@@ -4,8 +4,8 @@
     <div class="col-5">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "usuario", class: 'form-control' %>
+          <%= f.label :name %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "usuario", class: 'form-control' %>
         </div>
 
         <div class="form-group">
@@ -25,5 +25,5 @@
         </div>
       <% end %>
     </div>
-  </div>  
+  </div>
 </div>
