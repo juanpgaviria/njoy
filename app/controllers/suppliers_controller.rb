@@ -1,7 +1,7 @@
 class SuppliersController < ApplicationController
   before_action :authenticate_company!
   before_action :authenticate_admin!
-  before_action :find_supplier, except: %i[new create index]
+  before_action :find_supplier, except: %i[index new create]
 
   def index
     @suppliers = current_company.suppliers

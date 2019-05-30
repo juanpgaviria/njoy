@@ -15,6 +15,7 @@ class TransaktionsController < ApplicationController
 
   def new
     @transaktion = current_company.transaktions.new
+    @products = current_company.products
   end
 
   def create
@@ -23,6 +24,7 @@ class TransaktionsController < ApplicationController
       flash[:notice] = 'Transacción guardada exitosamente'
       redirect_to transaktion_path(@transaktion)
     else
+      @products = current_company.products
       render :new
     end
   end
