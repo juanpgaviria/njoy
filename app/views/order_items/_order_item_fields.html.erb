@@ -1,0 +1,6 @@
+<tr class= "text-center nested-fields" data-price="<%= menu.price %>">
+  <td><%= menu.name %></td>
+  <td>1</td>
+  <td><%= link_to_remove_association '<i class="fas fa-minus"></i>'.html_safe, f %></td>
+  <%= f.hidden_field :menu_id, value: menu.id %>
+</tr>

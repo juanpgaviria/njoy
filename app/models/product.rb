@@ -24,4 +24,8 @@ class Product < ApplicationRecord
   has_many :menus, through: :menu_items
 
   validates :name, :quantity, :price, :description, :brand, presence: true
+
+  def substract_product(amount)
+    update!(quantity: quantity - amount)
+  end
 end

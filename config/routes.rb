@@ -16,8 +16,11 @@ Rails.application.routes.draw do
   resources :products
   resources :suppliers
   resources :transaktions, only: %i[index show new create]
-  resources :menus
+  resources :menus do
+    get 'by_category', to: 'menus#by_category', default: :json, on: :collection
+  end
   resources :boards, except: :show do
+    resources :orders
     get 'positions', to: 'boards#positions', on: :collection
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

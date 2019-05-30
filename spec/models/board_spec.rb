@@ -9,7 +9,7 @@
 #  width      :integer
 #  height     :integer
 #  company_id :bigint(8)
-#  status     :integer
+#  status     :integer          default("free")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -18,5 +18,6 @@ require 'rails_helper'
 
 RSpec.describe Board, type: :model do
   it { should belong_to(:company) }
+  it { should have_many(:orders) }
   it { should validate_presence_of(:number) }
 end

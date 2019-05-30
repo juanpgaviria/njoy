@@ -1,0 +1,6 @@
+<div class="btn-group btn-group-lg" role="group" aria-label="categories">
+  <% categories.each do |category| %>
+    <%= link_to category.name, by_category_menus_path(category_id: category.id, board_id: board.id),
+                               class: 'btn btn-secondary', remote: true  %>
+  <% end %>
+</div>

@@ -1,6 +1,6 @@
 class MenusController < ApplicationController
   before_action :authenticate_company!
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, except: :by_category
   before_action :find_menu, only: %i[show edit update destroy]
 
   def index
@@ -49,6 +49,14 @@ class MenusController < ApplicationController
   def destroy
     @menu.destroy!
     redirect_to menus_path, notice: 'Menu borrado exitosamente'
+  end
+
+  def by_category
+    category = current_company.categories.find(params[:category_id])
+    @menus = category.menus
+    # we need to recreate a form_build in this response
+    @board = current_company.boards.find(params[:board_id])
+    @order = @board.orders.new
   end
 
   private

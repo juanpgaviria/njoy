@@ -2,12 +2,12 @@
 #
 # Table name: transaktions
 #
-#  id          :bigint           not null, primary key
+#  id          :bigint(8)        not null, primary key
 #  quantity    :integer
-#  kind        :integer          default(0)
-#  employee_id :bigint
-#  company_id  :bigint
-#  product_id  :bigint
+#  kind        :integer          default("deposit")
+#  employee_id :bigint(8)
+#  company_id  :bigint(8)
+#  product_id  :bigint(8)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
