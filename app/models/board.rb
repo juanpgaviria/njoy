@@ -18,5 +18,7 @@ class Board < ApplicationRecord
   belongs_to :company
   has_many :orders
   validates :number, presence: true
+  validates_uniqueness_of :number, scope: :company_id
+
   enum status: %i[free with_order busy]
 end

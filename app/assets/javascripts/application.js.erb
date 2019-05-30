@@ -20,9 +20,9 @@
 //= require select2
 //= require_tree .
 
-function growl(type, message) {
+function growl(type, message, css_selector) {
   $('<div class="alert alert-' + type + '">' + message + '</div>')
-      .appendTo('body')
+      .prependTo(css_selector)
       .delay(4000)
       .fadeOut(4000, function() {
         $(this).remove()

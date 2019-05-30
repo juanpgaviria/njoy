@@ -56,6 +56,7 @@ RSpec.describe 'Boards', type: :request do
           expect(response.status).to eq 200
         end
       end
+
       describe 'POST /board' do
         context 'valid request' do
           let!(:valid_attributes) { FactoryBot.attributes_for(:board) }
@@ -78,6 +79,7 @@ RSpec.describe 'Boards', type: :request do
           end
         end
       end
+
       describe 'GET /boards/:id/edit' do
         before { get "/boards/#{board.id}/edit", xhr: true }
 

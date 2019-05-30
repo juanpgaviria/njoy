@@ -3,7 +3,9 @@ class CategoryDatatable < AjaxDatatablesRails::ActiveRecord
     @view_columns ||= {
       name: { source: 'Category.name', cond: :like },
       description: { source: 'Category.description', cond: :like },
-      products: { source: 'Category.products.count',cond: :eq, searchable: false, orderable: false},
+      products: {
+        source: 'Category.products.count', cond: :eq, searchable: false, orderable: false
+      },
       actions: { searchable: false, orderable: false }
     }
   end

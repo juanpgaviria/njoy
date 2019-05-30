@@ -20,7 +20,7 @@ class BoardsController < ApplicationController
   end
 
   def update
-    @board.update!(board_params)
+    @board.update(board_params)
     return head :ok unless params[:from_form]
 
     @board = @board.decorate
