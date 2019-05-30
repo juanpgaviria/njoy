@@ -1,0 +1,4 @@
+<%= link_to_add_association menu.name, f, :order_items, partial: 'order_items/order_item_fields',
+      render_options: { locals: { menu: menu } },
+      data: { association_insertion_node: '.order-items', association_insertion_method: :prepend },
+      class: 'btn btn-success' %>

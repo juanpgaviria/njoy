@@ -148,6 +148,19 @@ RSpec.describe 'Menus', type: :request do
           expect(company.menus.count).to eq 9
         end
       end
+
+      describe 'GET /menus/by_category.json' do
+        let!(:category) { create(:category, company: company) }
+        let!(:board) { create(:board, company: company) }
+        let!(:menu) { create(:menu, company: company, category: category) }
+
+        it 'return the menu' do
+          get "/menus/by_category?board_id=#{board.id}&category_id=#{category.id}", xhr: true
+          expect(assigns(:menus).count).to eq 1
+          expect(assigns(:board)).to eq board
+          expect(assigns(:order).persisted?).to be_falsy
+        end
+      end
     end
   end
 end

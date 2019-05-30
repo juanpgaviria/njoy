@@ -18,6 +18,8 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
+  let!(:product) { create(:product, quantity: 10) }
+
   it { should belong_to(:company) }
   it { should belong_to(:supplier) }
   it { should belong_to(:category) }
@@ -28,4 +30,9 @@ RSpec.describe Product, type: :model do
   it { should validate_presence_of(:brand) }
   it { should validate_presence_of(:quantity) }
   it { should validate_presence_of(:description) }
+
+  it 'should substract quantity' do
+    product.substract_product(9)
+    expect(product.quantity).to eq 1
+  end
 end

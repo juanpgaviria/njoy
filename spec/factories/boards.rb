@@ -9,7 +9,7 @@
 #  width      :integer
 #  height     :integer
 #  company_id :bigint(8)
-#  status     :integer
+#  status     :integer          default("free")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -21,7 +21,7 @@ FactoryBot.define do
     sequence(:pos_y, (100..700).step(100).cycle) { |pos| pos }
     width { 100 }
     height { 100 }
-    status { Faker::Number.between(0, 2) }
+    status { 0 }
     company
   end
 end

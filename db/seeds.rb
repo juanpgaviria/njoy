@@ -17,14 +17,39 @@ company = user.companies.create!(email: 'njoy@njoy.com', password: 'test1234', n
   end
 end
 products = company.products
-categories = company.categories
-20.times do
-  menu = company.menus.create(
-    name: Faker::Food.unique.dish, price: rand(99_999), category: categories.sample,
-    menu_items: [MenuItem.create(quantity: rand(9), product: products.sample)]
-  )
+menu_categories = []
+menu_categories << company.categories
+                          .create!(name: 'Platos Fuertes', description: Faker::Lorem.sentence)
+menu_categories << company.categories.create(name: 'Entradas', description: Faker::Lorem.sentence)
+menu_categories << company.categories.create(name: 'Sushi', description: Faker::Lorem.sentence)
+menu_categories << company.categories.create(name: 'Frutas', description: Faker::Lorem.sentence)
+menu_categories << company.categories.create(name: 'Ensaladas', description: Faker::Lorem.sentence)
+
+20.times do |index|
+  if index < 8
+    name = Faker::Food.unique.dish
+    menu = company.menus.create(
+      name: name, price: rand(99_999), category: menu_categories[rand(2)],
+      menu_items: [MenuItem.create(quantity: rand(9), product: products.sample)]
+    )
+  elsif index >= 8 && index < 12
+    menu = company.menus.create(
+      name: Faker::Food.unique.sushi, price: rand(99_999), category: menu_categories[2],
+      menu_items: [MenuItem.create(quantity: rand(9), product: products.sample)]
+    )
+  elsif index >= 12 && index < 16
+    menu = company.menus.create(
+      name: Faker::Food.unique.fruits, price: rand(99_999), category: menu_categories[3],
+      menu_items: [MenuItem.create(quantity: rand(9), product: products.sample)]
+    )
+  else
+    menu = company.menus.create(
+      name: Faker::Food.unique.vegetables, price: rand(99_999), category: menu_categories[4],
+      menu_items: [MenuItem.create(quantity: rand(9), product: products.sample)]
+    )
+  end
   rand(1..10).times do
-    menu.menu_items.create(quantity: rand(1..100), product: products.sample)
+    menu.menu_items.create(quantity: rand(1..10), product: products.sample)
   end
   menu.save!
 end
@@ -47,9 +72,9 @@ employee = company.employees.create!(names: 'jefferson', last_names: 'bernal car
                             start_date: Faker::Date.between(1.years.ago, Date.today),
                             password: Faker::Number.unique.number(5))
   company.boards.create!(number: index + 1, pos_y: 50, pos_x: (100 * (index + 1)),
-                         width: 50, height: 50, status: rand(3))
+                         width: 50, height: 50)
   company.boards.create!(number: index * 2, pos_y: 150, pos_x: (200 * (index + 1)),
-                         width: 100, height: 100, status: rand(3))
+                         width: 100, height: 100)
   company.boards.create!(number: index * 3, pos_y: 300, pos_x: (220 * index),
-                         width: 200, height: 200, status: rand(3))
+                         width: 200, height: 200)
 end

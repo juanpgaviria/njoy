@@ -1,0 +1,21 @@
+// Place all the styles related to the orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.orders {
+  .menus, .order-list {
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  .order-list {
+    overflow: scroll;
+    height: 75vh;
+  }
+
+  .menus {
+    height: 65vh;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+}

@@ -7,7 +7,10 @@ describe 'Boards Layout', type: :feature, js: true do
   let!(:board) { boards.first }
   let!(:free_board) { create(:board, status: :free, company: company) }
   let!(:busy_board) { create(:board, status: :busy, company: company) }
-  let!(:with_order_board) { create(:board, status: :with_order, company: company) }
+  let!(:with_order_board) { create(:board, status: :free, company: company) }
+  let!(:order) do
+    create(:order, company: company, board: with_order_board)
+  end
 
   before do
     sign_in company
@@ -15,6 +18,7 @@ describe 'Boards Layout', type: :feature, js: true do
   end
 
   it 'editing layout success' do
+    with_order_board.with_order!
     expect(page).to have_current_path(new_employees_session_path)
     fill_in 'password', with: 1234
     click_button 'Entrar'

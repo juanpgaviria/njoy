@@ -9,15 +9,14 @@
 #  width      :integer
 #  height     :integer
 #  company_id :bigint(8)
-#  status     :integer
+#  status     :integer          default("free")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class Board < ApplicationRecord
   belongs_to :company
-
+  has_many :orders
   validates :number, presence: true
-
   enum status: %i[free with_order busy]
 end

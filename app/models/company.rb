@@ -24,6 +24,7 @@ class Company < ApplicationRecord
   has_many :transaktions, dependent: :destroy
   has_many :boards, dependent: :destroy
   has_many :menus, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

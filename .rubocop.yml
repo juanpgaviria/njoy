@@ -3,6 +3,7 @@ AllCops:
   Exclude:
     - 'db/schema.rb'
     - 'db/migrate/*'
+    - 'db/seeds.rb'
     - 'spec/spec_helper.rb'
     - 'spec/rails_helper.rb'
     - 'config/environments/**'
