@@ -1,22 +1,22 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-class CategoryTable
+class TransaktionTable
   constructor: () ->
     @initializeDatatable()
 
   initializeDatatable: () ->
-    $('#categories-datatable').dataTable
+    $('#transaktions-datatable').dataTable
       processing: true
       serverSide: true
       ajax:
-        url: $('#categories-datatable').data('source')
+        url:$('#transaktions-datatable').data('source')
       pagingType: 'full_numbers'
       columns: [
-        { data: 'name' }
-        { data: 'description' }
-        { data: 'products' }
-        { data: 'actions'}
+        { data: 'product' }
+        { data: 'kind' }
+        { data: 'quantity' }
+        { data: 'actions' }
       ]
 
-window.CategoryTable = CategoryTable
+window.TransaktionTable = TransaktionTable

@@ -4,7 +4,11 @@ class CategoriesController < ApplicationController
   before_action :find_category, except: %i[index new create]
 
   def index
-    @categories = current_company.categories.all
+    @categories = current_company.categories
+    respond_to do |format|
+      format.html
+      format.json { render json: CategoryDatatable.new(params, current_company: current_company) }
+    end
   end
 
   def show; end

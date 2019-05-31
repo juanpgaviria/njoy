@@ -5,6 +5,10 @@ class SuppliersController < ApplicationController
 
   def index
     @suppliers = current_company.suppliers
+    respond_to do |format|
+      format.html
+      format.json { render json: SupplierDatatable.new(params, current_company: current_company) }
+    end
   end
 
   def show; end

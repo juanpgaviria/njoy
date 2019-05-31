@@ -5,6 +5,12 @@ class EmployeesController < ApplicationController
 
   def index
     @employees = current_company.employees.all
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: EmployeeDatatable.new(params, current_company: current_company)
+      end
+    end
   end
 
   def new
