@@ -14,3 +14,24 @@ class EmployeePin
       $('.pin-confirmation').addClass('is-invalid')
 
 window.EmployeePin = EmployeePin
+
+class EmployeeTable
+  constructor: () ->
+    @initializeDatatable()
+
+  initializeDatatable: () ->
+    $('#employees-datatable').dataTable
+      processing: true
+      serverSide: true
+      ajax:
+        url: $('#employees-datatable').data('source')
+      pagingType: 'full_numbers'
+      columns: [
+        { data: 'names' }
+        { data: 'last_names'}
+        { data: 'phone' }
+        { data: 'email' }
+        { data: 'actions' }
+      ]
+
+window.EmployeeTable = EmployeeTable

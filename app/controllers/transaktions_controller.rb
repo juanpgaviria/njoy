@@ -5,6 +5,12 @@ class TransaktionsController < ApplicationController
 
   def index
     @transaktions = current_company.transaktions
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: TransaktionDatatable.new(params, current_company: current_company)
+      end
+    end
   end
 
   def new

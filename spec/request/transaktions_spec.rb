@@ -47,6 +47,17 @@ RSpec.describe 'Transaktions', type: :request do
         end
       end
 
+      it 'returns a json object' do
+        get '/transaktions.json', xhr: true, params: { 'columns[0][data]':
+                                                      'name', 'columns[0][search][regex]': false }
+
+        hash_response = nil
+        expect {
+          hash_response = JSON.parse(response.body).with_indifferent_access
+        }.to_not raise_exception
+        expect(hash_response[:recordsTotal]).to eq 1
+      end
+
       describe 'GET /transaktions/:id' do
         before { get "/transaktions/#{transaktion.id}" }
 
