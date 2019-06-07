@@ -9,7 +9,7 @@ describe 'Company signin process', type: :feature, js: true do
     expect(page).to have_current_path(new_company_session_path)
 
     within('form#new_company') do
-      fill_in 'company_email', with: company.email
+      fill_in 'company_name', with: company.name
       fill_in 'company_password', with: company.password
     end
     click_button 'Entrar'
