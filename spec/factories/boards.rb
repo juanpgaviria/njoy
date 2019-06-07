@@ -16,7 +16,7 @@
 
 FactoryBot.define do
   factory :board do
-    number { Faker::Number.number(2) }
+    number { Faker::Number.unique.number(4) }
     sequence(:pos_x, (100..700).step(100).cycle) { |pos| pos }
     sequence(:pos_y, (100..700).step(100).cycle) { |pos| pos }
     width { 100 }

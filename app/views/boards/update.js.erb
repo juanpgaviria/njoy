@@ -1,6 +1,6 @@
 <% if @board.errors.any? %>
-  <% @board.errors.each do |error| %>
-    growl('danger', error)
+  <% @board.errors.full_messages.each do |error| %>
+    growl('danger', "<%= error %>", "#edit_board_<%= @board.id %>")
   <% end %>
 <% else %>
   $("#board-<%= @board.id %>").remove()
