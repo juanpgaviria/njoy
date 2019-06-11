@@ -68,12 +68,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   # code styling reviewer
   gem 'rubocop', require: false
-  gem 'selenium-webdriver'
+  gem 'webdrivers', '~> 4.0'
 end
 
 group :test do
+  gem 'brakeman', require: false
   gem 'capybara'
-  gem 'chromedriver-helper'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'

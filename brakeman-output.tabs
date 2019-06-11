@@ -1,0 +1,8 @@
+/home/jeffe/work/pos/njoy/app/controllers/employees_controller.rb	50	Mass Assignment	General	Potentially dangerous key allowed for mass assignment near line 50: params.require(:employee).permit(:names, :last_names, :phone, :address, :state, :city, :identification, :password, :birthday, :start_date, :email, :role)	Medium
+/home/jeffe/work/pos/njoy/app/controllers/menus_controller.rb	41	Redirect	General	Possible unprotected redirect near line 41: redirect_to(current_company.menus.find(params[:id]), :notice => "Plato del menu actualizado exitosamente")	Weak
+
+
+/home/jeffe/work/pos/njoy/app/views/categories/show.html.erb	32	Dynamic Render Path	Template	Render path contains parameter value near line 32: render(action => current_company.categories.find(params[:id]).products, {})	Weak
+/home/jeffe/work/pos/njoy/app/views/menus/by_category.js.erb	2	Dynamic Render Path	Template	Render path contains parameter value near line 2: render(action => current_company.categories.find(params[:category_id]).menus, { :f => FormBuilder.new })	Weak
+/home/jeffe/work/pos/njoy/app/views/menus/show.html.erb	28	Dynamic Render Path	Template	Render path contains parameter value near line 28: render(action => current_company.menus.find(params[:id]).menu_items, {})	Weak
+/home/jeffe/work/pos/njoy/app/views/suppliers/show.html.erb	35	Dynamic Render Path	Template	Render path contains parameter value near line 35: render(action => current_company.suppliers.find(params[:id]).products, {})	Weak
