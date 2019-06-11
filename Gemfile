@@ -72,8 +72,11 @@ group :development, :test do
 end
 
 group :test do
+  gem "brakeman", :require => false
   gem 'capybara'
   gem 'chromedriver-helper'
+  gem 'ci_reporter'
+  gem 'ci_reporter_rspec'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
