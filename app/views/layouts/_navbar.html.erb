@@ -27,12 +27,25 @@
           </li>
           <%= show_boards_button %>
         <% end %>
+        <% if current_employee %>
+          <li>
+            <%= link_to 'Turnos', employee_path(current_employee), class: 'nav-link' %>
+          </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav ml-auto">
         <% if current_company %>
           <% if current_employee %>
-            <li class="nav-item">
-              <%= link_to "Salir #{current_employee.names.titleize}", employees_sessions_path, method: :delete, class: 'nav-link' %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="employeeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">
+                <%= current_employee.names.capitalize %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="employeeDropdown">
+                <% if current_employee.active? %>
+                  <%= link_to 'Marcar salida', attendance_path(current_employee), method: :delete, class: 'dropdown-item' %>
+                <% end %>
+                <%= link_to 'Salir', employees_sessions_path, method: :delete, class: 'dropdown-item' %>
+              </div>
             </li>
           <% else %>
             <li class="nav-item">

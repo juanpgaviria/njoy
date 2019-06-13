@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       delete 'destroy', on: :collection
     end
   end
+  resources :attendances, only: %i[destroy]
   resources :companies, only: %i[index show]
   resources :categories
   resources :products

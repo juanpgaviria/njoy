@@ -3,8 +3,9 @@ class Employees::SessionsController < ApplicationController
 
   def create
     employee = current_company.employees.find_by_password(encrypted_password)
-    if employee
+    if employee && !employee.archived?
       employee_sign_in(employee)
+      create_attendance if current_employee.inactive?
       redirect_to boards_path
     else
       flash[:alert] = 'Pin incorrecto'
@@ -18,6 +19,10 @@ class Employees::SessionsController < ApplicationController
   end
 
   private
+
+  def create_attendance
+    Attendance.create_attendance(current_employee)
+  end
 
   def session_params
     params.permit(:password)

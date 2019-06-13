@@ -9,6 +9,20 @@ describe 'Employee signin process', type: :feature, js: true do
     sign_in company
   end
 
+  context 'archived employee sign_in' do
+    let!(:employee) { create(:employee, company: company, password: '0000', status: :archived) }
+
+    it 'avoid sign_in' do
+      visit '/'
+
+      within('form') do
+        fill_in 'password', with: '0000'
+        click_button 'Entrar'
+      end
+      expect(page).to have_content('Pin incorrecto')
+    end
+  end
+
   it 'create and login employee flow' do
     visit '/'
 
@@ -55,7 +69,8 @@ describe 'Employee signin process', type: :feature, js: true do
     end
     expect(page).to have_current_path(employee_path(Employee.last))
 
-    click_link "Salir #{employee.names}"
+    click_link employee.names.to_s
+    click_link 'Salir'
     click_link 'Empleado'
 
     within('form') do
@@ -68,7 +83,8 @@ describe 'Employee signin process', type: :feature, js: true do
     expect(page).to have_content('Pin incorrecto')
     click_button 'Entrar'
     expect(page).to have_current_path(boards_path)
-    click_link "Salir #{Employee.last.names}"
+    click_link Employee.last.names.to_s
+    click_link 'Salir'
     expect(page).to have_current_path(new_employees_session_path)
   end
 end

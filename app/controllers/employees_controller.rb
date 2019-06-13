@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_company!
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, except: %i[show]
   before_action :find_employee, except: %i[index new create]
 
   def index
@@ -11,6 +11,10 @@ class EmployeesController < ApplicationController
         render json: EmployeeDatatable.new(params, current_company: current_company)
       end
     end
+  end
+
+  def show
+    authorize @employee
   end
 
   def new
@@ -47,7 +51,7 @@ class EmployeesController < ApplicationController
   def employee_params
     params.require(:employee).permit(:names, :last_names, :phone, :address, :state, :city,
                                      :identification, :password, :birthday, :start_date,
-                                     :email, :role)
+                                     :email, :role, :status)
   end
 
   def find_employee

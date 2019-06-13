@@ -23,8 +23,11 @@ RSpec.describe 'Employees', type: :request do
       before { sign_in_employee }
 
       it 'should redirect' do
+        employee.reload
         expect(response.status).to eq 302
         expect(response).to redirect_to boards_path
+        expect(employee.attendances.count).to eq 1
+        expect(employee.status).to eq 'active'
       end
     end
 
@@ -116,6 +119,28 @@ RSpec.describe 'Employees', type: :request do
           it 'fail' do
             expect(response.status).to eq 200
             expect(response).to render_template(:edit)
+          end
+        end
+
+        context 'archive employee' do
+          before { put "/employees/#{employee.id}", params: { employee: { status: :archived } } }
+
+          it 'success' do
+            employee.reload
+            expect(response.status).to eq 302
+            expect(employee.status).to eq 'archived'
+            expect(response).to redirect_to employee_path(employee)
+          end
+        end
+
+        context 'unarchive employee' do
+          before { put "/employees/#{employee.id}", params: { employee: { status: :inactive } } }
+
+          it 'success' do
+            employee.reload
+            expect(response.status).to eq 302
+            expect(employee.status).to eq 'inactive'
+            expect(response).to redirect_to employee_path(employee)
           end
         end
       end
