@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = current_company.products.new
+    @categories = current_company.categories
   end
 
   def create
@@ -21,17 +22,21 @@ class ProductsController < ApplicationController
       flash[:notice] = 'Producto guardado exitosamente'
       redirect_to product_path(@product)
     else
+      @categories = current_company.categories
       render :new
     end
   end
 
-  def edit; end
+  def edit
+    @categories = current_company.categories
+  end
 
   def update
     if @product.update(product_params)
       flash[:notice] = 'Producto actualizado exitosamente'
       redirect_to product_path(@product)
     else
+      @categories = current_company.categories
       render :edit
     end
   end
