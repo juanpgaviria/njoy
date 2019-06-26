@@ -32,9 +32,12 @@ RSpec.describe 'Employees sessions', type: :request do
         before { post '/employees/sessions', params: { password: '1234' } }
 
         it 'should create a session' do
+          employee.reload
           expect(response.status).to eq 302
           expect(response.cookies['employee_id']).to_not be_nil
           expect(assigns(:current_employee)).to eq employee
+          expect(employee.attendances.count).to eq 1
+          expect(employee.status).to eq 'active'
         end
       end
 
@@ -42,6 +45,19 @@ RSpec.describe 'Employees sessions', type: :request do
         before { post '/employees/sessions', params: { password: '' } }
 
         it 'should render login form' do
+          expect(response).to render_template :new
+        end
+      end
+
+      context 'archive employee' do
+        let!(:employee) {
+          create(:employee, company: company, status: :archived, password: '12345')
+        }
+
+        before { post '/employees/sessions', params: { password: '12345' } }
+
+        it 'success' do
+          expect(response.status).to eq 200
           expect(response).to render_template :new
         end
       end

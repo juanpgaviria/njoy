@@ -1,0 +1,5 @@
+<tr id="attendance_<%= attendance.id %>">
+  <td><%= attendance.employee.names.titleize %></td>
+  <td><%= (attendance.start_time - 5.hours ).strftime("%-H:%M") || 'sin registro' %></td>
+  <td><%= attendance.end_time ? (attendance.end_time  - 5.hours).strftime("%-H:%M") : 'En turno' %></td>
+</tr>

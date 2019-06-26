@@ -1,2 +1,2 @@
 <%= link_to "Ver", transaktion_path(transaktion) %> |
-<%= link_to "Borrar", transaktion_path(transaktion), method: :delete %>
+<%= link_to "Borrar", transaktion_path(transaktion), method: :delete, data: { confirm: '¿Borrar transacción?'} %>

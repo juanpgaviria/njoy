@@ -31,6 +31,7 @@ class EmployeeTable
         { data: 'last_names'}
         { data: 'phone' }
         { data: 'email' }
+        { data: 'status' }
         { data: 'actions' }
       ]
 

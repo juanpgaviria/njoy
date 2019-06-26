@@ -5,6 +5,7 @@ class EmployeeDatatable < AjaxDatatablesRails::ActiveRecord
       last_names: { source: 'Employee.last_names', cond: :like },
       phone: { source: 'Employee.phone', cond: :like },
       email: { source: 'Employee.email', cond: :like },
+      status: { source: 'Employee.status', cond: :like },
       actions: { searchable: false, orderable: false }
     }
   end
@@ -16,6 +17,7 @@ class EmployeeDatatable < AjaxDatatablesRails::ActiveRecord
         last_names: record.last_names,
         phone: record.phone,
         email: record.email,
+        status: record.status,
         actions: actions(record)
       }
     end

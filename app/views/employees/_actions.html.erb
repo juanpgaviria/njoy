@@ -1,3 +1,8 @@
 <%= link_to "Ver", employee_path(employee) %> |
 <%= link_to "Editar", edit_employee_path(employee) %> |
-<%= link_to "Borrar", employee_path(employee), method: :delete %>
+<% if employee.archived? %>
+  <%= link_to "Desarchivar", employee_path(employee, { employee: { status: :inactive } }), method: :put, data: { confirm: '¿Desarchivar empleado?' } %>
+<% else %>
+  <%= link_to "Archivar", employee_path(employee, { employee: { status: :archived } }), method: :put, data: { confirm: '¿Archivar empleado?' } %>
+<% end %> |
+<%= link_to "Borrar", employee_path(employee), method: :delete, data: { confirm: '¿Borrar empleado?' } %>

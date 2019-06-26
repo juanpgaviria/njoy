@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_202405) do
+ActiveRecord::Schema.define(version: 2019_06_12_150752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "employee_id"
+    t.time "end_time"
+    t.time "start_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_attendances_on_employee_id"
+  end
 
   create_table "boards", force: :cascade do |t|
     t.integer "number"
@@ -68,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_202405) do
     t.binary "password"
     t.bigint "company_id"
     t.integer "role", default: 0
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_employees_on_company_id"
@@ -168,6 +178,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_202405) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendances", "employees"
   add_foreign_key "boards", "companies"
   add_foreign_key "categories", "companies"
   add_foreign_key "companies", "users"
